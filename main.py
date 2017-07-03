@@ -6,6 +6,7 @@ from kivy.config import Config
 
 from MainScreen import *
 
+
 class MainApp(App):
 
     def build(self):
