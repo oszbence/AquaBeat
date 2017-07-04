@@ -1,0 +1,30 @@
+#:kivy 1.0
+
+<MainScreen>
+	BoxLayout:
+		orientation: 'vertical'
+		padding: 10
+		size_hint_x: 1
+		size_hint_y: 1
+		
+		Label:
+			text: 'AquaBeat'
+			size_hint_y: .25
+			
+		BoxLayout:
+			orientation: 'horizontal'
+			size_hint_y: .50
+			
+			Button:
+				text: 'MASS STORAGE'
+				on_press: root.manager.current = 'storage'
+				
+			Button:
+				text: 'MEDIA PLAYER'
+				
+			Button:
+				text: 'BLUETOOTH MODE'
+				
+		#Bottom placeholder
+		BoxLayout:
+			size_hint_y: .25
