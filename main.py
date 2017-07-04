@@ -16,6 +16,8 @@ Config.set('graphics', 'height', 320)
 Config.write()
 
 # Load UI declarations
+Builder.load_file('AquaScreen.kv')
+Builder.load_file('Layouts.kv')
 Builder.load_file('MainScreen.kv')
 Builder.load_file('StorageScreen.kv')
 
