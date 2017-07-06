@@ -21,6 +21,7 @@ Builder.load_file('Layouts.kv')
 Builder.load_file('Widgets.kv')
 Builder.load_file('MainScreen.kv')
 Builder.load_file('StorageScreen.kv')
+Builder.load_file('MediaPlayerScreen.kv')
 
 # Declare all screens
 class MainScreen(Screen):
@@ -29,10 +30,14 @@ class MainScreen(Screen):
 class StorageScreen(Screen):
     pass
 
+class MediaPlayerScreen(Screen):
+    pass
+
 # Create the screen manager
 sm = ScreenManager()
 sm.add_widget(MainScreen(name='main'))
 sm.add_widget(StorageScreen(name='storage'))
+sm.add_widget(MediaPlayerScreen(name='mediaPlayer'))
 
 class MainApp(App):
 
