@@ -1,29 +1,16 @@
 #:kivy 1.0
 
 <MediaPlayerScreen>
-	AquaScreen:
+	AquaScreen
 
-		TopLayout:
-		    BackButton:
-		        on_press: root.manager.current = 'main'
+		FilledLeftLayout
 
-		    Title:
+        CenterLayout
+		    Title
 			    text: 'Media Player'
 
-			VolUpButton:
+			FileChooserListView
+			    size_hint_y: .8
+			    on_selection: app.onListItemSelected(self.selection)
 
-        CenterLayout:
-            HorizontalSpace:
-
-            Title:
-                text: 'TODO list of tracks'
-
-            VolDownLayout:
-
-        BottomLayout:
-            PrevButton:
-
-            Title:
-                # Empty, just a placeholder
-
-            NextButton:
+        FilledRightLayout

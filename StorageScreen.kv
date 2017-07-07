@@ -1,17 +1,14 @@
 #:kivy 1.0
 
 <StorageScreen>
-	AquaScreen:
+	AquaScreen
 
-		TopLayout:
-		    BackButton:
-		        on_press: root.manager.current = 'main'
+		SimpleLeftLayout
 
-		    Title:
+        CenterLayout
+            Title
 			    text: 'Mass Storage'
 
-			HorizontalSpace:
+            VSpace80
 
-        CenterLayout:
-
-        BottomLayout:
+        RightLayout
