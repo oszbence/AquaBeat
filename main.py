@@ -50,6 +50,8 @@ sm.add_widget(BluetoothScreen(name='bluetooth'))
 
 
 class MainApp(App):
+    # Current music
+    sound = None
 
     def build(self):
         return sm
@@ -62,11 +64,14 @@ class MainApp(App):
         try:
             # Check file type
             (name, extension) = os.path.splitext(selectedFilePaths[0])
-            if(extension=='.mp3'):
-                print 'Playing file:', name + extension
-                # Play media
-                sound = SoundLoader.load(selectedFilePaths[0])
-                sound.play()
+            if extension == '.mp3':
+                # Stop previous track if present
+                if self.sound:
+                    self.sound.stop()
+                # Play new track
+                print 'Playing file:', selectedFilePaths[0]
+                self.sound = SoundLoader.load(selectedFilePaths[0])
+                self.sound.play()
             else:
                 print 'File type', extension, 'is not supported!'
 
