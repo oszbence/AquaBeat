@@ -56,12 +56,19 @@ class MainApp(App):
 
     # Called from MediaPlayerScreen.FileChooserListView when a file is selected
     def onListItemSelected(self, selectedFilePaths):
-        # Check file type
-        # TODO check index!
-        (name, extension) = os.path.splitext(selectedFilePaths[0])
-        print extension
-        # Play media
-        # TODO
+        try:
+            # Check file type
+            (name, extension) = os.path.splitext(selectedFilePaths[0])
+            if(extension=='.mp3'):
+                print 'Playing file:', name + extension
+                # Play media
+                # TODO
+            else:
+                print 'File type', extension, 'is not supported!'
+
+        # IndexError can occur from selectedFilePaths[0]
+        except IndexError as detail:
+            print 'IndexError:', detail
 
 if __name__ == '__main__':
     MainApp().run()
