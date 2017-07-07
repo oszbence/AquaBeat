@@ -7,6 +7,7 @@ from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 import os
+from threading import Thread
 
 
 # Config app
@@ -47,6 +48,15 @@ sm.add_widget(StorageScreen(name='storage'))
 sm.add_widget(MediaPlayerScreen(name='mediaPlayer'))
 sm.add_widget(BluetoothScreen(name='bluetooth'))
 
+vlcPath = '"C:/Program Files (x86)/VideoLAN/VLC/vlc.exe" '
+vlcAttr = '-I dummy --dummy-quiet ' # no vlc window, just sound
+
+def playSound(path):
+    #playMediaCommand = vlcPath + vlcAttr + path
+    playMediaCommand = vlcPath + path
+    print playMediaCommand
+    os.popen(playMediaCommand)
+
 class MainApp(App):
 
     def build(self):
@@ -63,14 +73,19 @@ class MainApp(App):
             if(extension=='.mp3'):
                 print 'Playing file:', name + extension
                 # Play media
-                playMediaCommand = 'notepad.exe'
-                os.popen(playMediaCommand)
+                path = '"' + selectedFilePaths[0] + '"'
+                path = 'C:\data\music\scooter\scooter - Enola gay.mp3' #not working
+                path = 'C:\data\music\scooter\scooter1.mp3' #working
+                playerThread = Thread(target=playSound, args = (path, ))
+                playerThread.start()
+                print 'Thread started'
             else:
                 print 'File type', extension, 'is not supported!'
 
         # IndexError can occur from selectedFilePaths[0]
         except IndexError as detail:
             print 'IndexError:', detail
+
 
 if __name__ == '__main__':
     MainApp().run()
