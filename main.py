@@ -5,9 +5,9 @@ from kivy.app import App
 from kivy.config import Config
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivy.core.audio import SoundLoader
 
 import os
-from threading import Thread
 
 
 # Config app
@@ -48,14 +48,6 @@ sm.add_widget(StorageScreen(name='storage'))
 sm.add_widget(MediaPlayerScreen(name='mediaPlayer'))
 sm.add_widget(BluetoothScreen(name='bluetooth'))
 
-vlcPath = '"C:/Program Files (x86)/VideoLAN/VLC/vlc.exe" '
-vlcAttr = '-I dummy --dummy-quiet ' # no vlc window, just sound
-
-def playSound(path):
-    #playMediaCommand = vlcPath + vlcAttr + path
-    playMediaCommand = vlcPath + path
-    print playMediaCommand
-    os.popen(playMediaCommand)
 
 class MainApp(App):
 
@@ -73,12 +65,8 @@ class MainApp(App):
             if(extension=='.mp3'):
                 print 'Playing file:', name + extension
                 # Play media
-                path = '"' + selectedFilePaths[0] + '"'
-                path = 'C:\data\music\scooter\scooter - Enola gay.mp3' #not working
-                path = 'C:\data\music\scooter\scooter1.mp3' #working
-                playerThread = Thread(target=playSound, args = (path, ))
-                playerThread.start()
-                print 'Thread started'
+                sound = SoundLoader.load(selectedFilePaths[0])
+                sound.play()
             else:
                 print 'File type', extension, 'is not supported!'
 
