@@ -6,7 +6,8 @@ from kivy.config import Config
 from kivy.lang import Builder
 from kivy.uix.screenmanager import ScreenManager, Screen
 
-import os.path
+import os
+
 
 # Config app
 # to run on opengl 1.1 as well
@@ -62,7 +63,8 @@ class MainApp(App):
             if(extension=='.mp3'):
                 print 'Playing file:', name + extension
                 # Play media
-                # TODO
+                playMediaCommand = 'notepad.exe'
+                os.popen(playMediaCommand)
             else:
                 print 'File type', extension, 'is not supported!'
 
