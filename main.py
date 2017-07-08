@@ -1,5 +1,5 @@
 import kivy
-kivy.require('1.0.6')
+kivy.require('1.3.0') # 1.3.0: for Sound.volume
 
 from kivy.app import App
 from kivy.config import Config
@@ -52,6 +52,7 @@ sm.add_widget(BluetoothScreen(name='bluetooth'))
 class MainApp(App):
     # Current music
     sound = None
+    volume = 1.0
 
     def build(self):
         return sm
@@ -68,9 +69,13 @@ class MainApp(App):
                 # Stop previous track if present
                 if self.sound:
                     self.sound.stop()
-                # Play new track
+
                 print 'Playing file:', selectedFilePaths[0]
+                # Load new track
                 self.sound = SoundLoader.load(selectedFilePaths[0])
+                # Apply previously set volume for new track
+                self.sound.volume = self.volume
+                # Play new track
                 self.sound.play()
             else:
                 print 'File type', extension, 'is not supported!'
@@ -91,6 +96,30 @@ class MainApp(App):
                         self.sound.stop()
                     else:
                         self.sound.play()
+
+    def volUp(self):
+        if sm.current == 'bluetooth':
+            # TODO handle volume at system level
+            pass
+        else:
+            if sm.current == 'mediaPlayer':
+                if self.sound is not None:
+                    if self.sound.volume <= 0.9:
+                        self.sound.volume = self.sound.volume + 0.1
+                        # save volume info for next track
+                        self.volume = self.sound.volume
+
+    def volDown(self):
+        if sm.current == 'bluetooth':
+            # TODO handle volume at system level
+            pass
+        else:
+            if sm.current == 'mediaPlayer':
+                if self.sound is not None:
+                    if self.sound.volume >= 0.1:
+                        self.sound.volume = self.sound.volume - 0.1
+                        # save volume info for next track
+                        self.volume = self.sound.volume
 
 
 if __name__ == '__main__':
