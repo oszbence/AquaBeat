@@ -17,6 +17,7 @@
 
 <BackButton@SmallButton>
     text: 'Back'
+    on_press: app.setScreen('main')
 
 <VolUpButton@SmallButton>
     text: 'Volume++'
@@ -35,6 +36,10 @@
 
 <SettingsButton@SmallButton>
     text: 'Settings'
+
+<PlayOrStopButton@SmallButton>
+    text: 'Play/Stop'
+    on_press: app.playOrStop()
 
 # Others
 <VSpace20@Label>

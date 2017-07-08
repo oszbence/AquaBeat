@@ -79,6 +79,19 @@ class MainApp(App):
         except IndexError as detail:
             print 'IndexError:', detail
 
+    def playOrStop(self):
+        if sm.current == 'bluetooth':
+            # TODO handle bluetooth play/stop
+            pass
+        else:
+            if sm.current == 'mediaPlayer':
+                if self.sound is not None:
+                    if self.sound.state == 'play':
+                        # self.sound.get_pos() # returns always 0 :(
+                        self.sound.stop()
+                    else:
+                        self.sound.play()
+
 
 if __name__ == '__main__':
     MainApp().run()
